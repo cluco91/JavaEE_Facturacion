@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Acceso al Sistema</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="/css/login.css" />
+    </h:head>
+    <h:body>
+        <div class="login">
+            <h:form id="formLogin">            
+                <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+                    <p:graphicImage name="/demo/images/login.png" />
+                </h:outputLink>
+
+                <p:growl id="mensajeGeneral" sticky="true" showDetail="true" life="3000" />
+
+                <p:panel header="Iniciar Sesion - Sistema de Facturas" widgetVar="dlg">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="usuario" value="Usuario:" />
+                        <p:inputText id="usuario" value="#{loginBean.usuario.nombreUsuario}" placeholder="Usuario" required="true" label="username" 
+                                    requiredMessage="Escriba el usuario por favor" />
+
+                        <h:outputLabel for="password" value="Password:" />
+                        <p:password id="password" value="#{loginBean.usuario.password}" placeholder="Password" required="true" label="password" 
+                                    requiredMessage="Escriba el password por favor" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Login" update=":formLogin" actionListener="#{loginBean.login(event)}"
+                                             oncomplete="handleLoginRequest(xhr, status, args)" />
+                        </f:facet>  
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loggedIn) {
+                    jQuery('#formLogin').effect('shake', {times: 3}, 350);
+                } else {
+                    location.href = args.ruta;
+                }
+            }
+        </script>
+    </h:body>
+</html>
