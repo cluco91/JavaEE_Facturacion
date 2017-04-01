@@ -1,3 +1,5 @@
+![Image of Yaktocat](https://github.com/cluco91/JavaEE_Facturacion/blob/master/facturacion.png)
+
 # JavaEE_Facturacion
 
 -Consiste en una aplicacion donde basandose en operaciones CRUD 
